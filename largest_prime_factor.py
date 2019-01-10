@@ -9,6 +9,5 @@ while i < n:
         n, i = n // i, 2
     else:
         i += 1
-else:
-    print(n)
+print(n)
 
