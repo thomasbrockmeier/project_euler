@@ -2,6 +2,21 @@
 # 
 # What is the 10 001st prime number?
 
+def is_prime(n):
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if not n % 2 or not n % 3:
+        return False
+    i = 5
+    while i * i <= n:
+        if not n % i or not n % (i + 2):
+            return False
+        i += 6
+    return True
+
+
 c = i = 0
 
 while c < 10001:
