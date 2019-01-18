@@ -15,16 +15,28 @@
 # 
 # NOTE: Once the chain starts the terms are allowed to go above one million.
 
+def collatz(n): 
+    def _collatz(i): 
+        x = solutions.get(i)
+        if not x:
+            if not i % 2:
+                x = 1 + _collatz(i // 2) 
+            else:
+                x = 2 + _collatz((3 * i + 1) // 2)
+            solutions[i] = x
+        return x
 
-def collatz(n, length=1): 
-    if not n: 
-        return 0 
-    if n == 1: 
-        return length 
-    return collatz(3 * n + 1, length + 1) if n % 2 else collatz(n / 2, length + 1)
+    longest_chain = 0 
+    solutions = {1: 1} 
+    for x in range(n // 2, n): 
+        new_chain = _collatz(x) 
+        if new_chain > longest_chain: 
+            longest_chain = new_chain 
 
+    for k, v in solutions.items(): 
+        if v == longest_chain: 
+            return k
 
 target = 1000000
-c = [collatz(x) for x in range(target)]
-print(c.index(max(c)))
+print(collatz(target))
 
